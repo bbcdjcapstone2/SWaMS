@@ -1,0 +1,491 @@
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.dashboard-main {
+  flex: 1;
+
+  min-width: 0;
+  min-height: 100vh;
+
+  padding: 27px 0 20px 24px;
+
+  background:
+    linear-gradient(
+      108deg,
+      #c4e3e2 0%,
+      #9bcaca 30%,
+      #50afb1 67%,
+      #078f96 100%
+    );
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+  width: 823px;
+  height: 63px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 0;
+
+  color: #000;
+}
+
+
+.header-title {
+  margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 26px;
+  line-height: 27px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.5px;
+}
+
+
+.header-subtitle {
+  margin: 2px 0 0 4px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 11px;
+  line-height: 11px;
+
+  font-weight: 700;
+}
+
+
+.header-date {
+  margin-top: 35px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+/* =========================================================
+   SAFE STATUS
+   ========================================================= */
+
+.safe-container {
+  width: 823px;
+
+  margin: 0 0 31px 0;
+}
+
+
+.safe-box {
+  width: 823px;
+  height: 137px;
+
+  padding: 6px;
+
+  border: 5px solid #002b2c;
+
+  background: #00a979;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  color: #000;
+
+  font-size: 52px;
+
+  font-weight: 800;
+
+  letter-spacing: 5px;
+}
+
+
+.safe-box.warning-status {
+  background: #f0a51c;
+}
+
+
+/* =========================================================
+   SENSOR VALUE CARDS
+   ========================================================= */
+
+.status-grid {
+  width: 823px;
+
+  height: 101px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 17px;
+
+  margin-bottom: 31px;
+}
+
+
+.status-card {
+  height: 101px;
+
+  background: #003b40;
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+.status-card-title {
+  margin-bottom: 5px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 11px;
+
+  font-weight: 700;
+}
+
+
+.status-card-value {
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 32px;
+
+  line-height: 32px;
+
+  font-weight: 700;
+}
+
+
+.status-card-unit {
+  margin-left: 5px;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  vertical-align: middle;
+}
+
+
+/* =========================================================
+   BOTTOM MONITORING CONTAINER
+   ========================================================= */
+
+.monitoring-panel {
+  width: 823px;
+  height: 306px;
+
+  background: #003b40;
+
+  display: grid;
+
+  grid-template-columns: 194px 511px;
+
+  column-gap: 15px;
+
+  padding: 14px 50px 21px 53px;
+}
+
+
+/* =========================================================
+   GENERAL PANEL
+   ========================================================= */
+
+.panel {
+  min-width: 0;
+
+  background: transparent;
+
+  color: white;
+}
+
+
+.panel-header {
+  height: 30px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  padding: 0;
+}
+
+
+.panel-title {
+  margin: 0;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 11px;
+
+  line-height: 13px;
+
+  font-weight: 700;
+
+  color: white;
+}
+
+
+/* =========================================================
+   ALERT PANEL
+   ========================================================= */
+
+.alert-list {
+  width: 194px;
+  height: 240px;
+
+  background: #078f9a;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+
+.no-alerts {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+
+  font-family: "Rajdhani", Arial, sans-serif;
+
+  text-align: center;
+}
+
+
+.no-alerts-main {
+  width: 184px;
+
+  padding-bottom: 13px;
+
+  border-bottom: 1px solid rgba(255,255,255,0.8);
+
+  font-size: 24px;
+
+  line-height: 25px;
+
+  font-weight: 500;
+}
+
+
+.no-alerts-subtitle {
+  margin-top: 7px;
+
+  font-size: 12px;
+
+  line-height: 13px;
+
+  font-weight: 400;
+}
+
+
+/* Actual alert */
+
+.alert-item {
+  width: 100%;
+
+  padding: 20px 15px;
+
+  color: white;
+
+  border-bottom: 1px solid rgba(255,255,255,0.25);
+}
+
+
+.alert-item-header {
+  display: flex;
+
+  justify-content: space-between;
+}
+
+
+.alert-parameter {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+.alert-value {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+
+.alert-message {
+  margin: 8px 0 0;
+
+  font-size: 12px;
+}
+
+
+.alert-time {
+  margin-top: 7px;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   LOGS TABLE
+   ========================================================= */
+
+.logs-table-wrapper {
+  width: 511px;
+  height: 240px;
+
+  overflow: hidden;
+}
+
+
+.logs-table {
+  width: 511px;
+  height: auto;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
+
+  color: white;
+
+  font-family: "Rajdhani", Arial, sans-serif;
+}
+
+
+/* Column widths */
+
+.logs-table th:nth-child(1),
+.logs-table td:nth-child(1) {
+  width: 113px;
+}
+
+.logs-table th:nth-child(2),
+.logs-table td:nth-child(2) {
+  width: 72px;
+}
+
+.logs-table th:nth-child(3),
+.logs-table td:nth-child(3) {
+  width: 70px;
+}
+
+.logs-table th:nth-child(4),
+.logs-table td:nth-child(4) {
+  width: 120px;
+}
+
+.logs-table th:nth-child(5),
+.logs-table td:nth-child(5) {
+  width: 116px;
+}
+
+
+/* Header */
+
+.logs-table th {
+  height: 29px;
+
+  padding: 0;
+
+  background: transparent;
+
+  color: white;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 8px;
+
+  font-weight: 700;
+
+  text-align: center;
+
+  vertical-align: middle;
+
+  border-right: 1px solid rgba(255,255,255,0.65);
+}
+
+
+.logs-table th:last-child {
+  border-right: none;
+}
+
+
+/* Data */
+
+.logs-table td {
+  height: 34px;
+
+  padding: 0;
+
+  color: white;
+
+  font-size: 11px;
+
+  font-weight: 400;
+
+  text-align: center;
+
+  vertical-align: middle;
+
+  border-right: 1px solid rgba(255,255,255,0.55);
+}
+
+
+.logs-table td:last-child {
+  border-right: none;
+}
+
+
+/* =========================================================
+   STATUS DOTS
+   ========================================================= */
+
+.status-dot {
+  width: 20px;
+  height: 20px;
+
+  display: inline-block;
+
+  border-radius: 50%;
+}
+
+
+.status-dot.safe {
+  background: #00b87a;
+}
+
+
+.status-dot.warning {
+  background: #ff9f1a;
+}
+
+
+.status-dot.danger {
+  background: #e64b4b;
+}

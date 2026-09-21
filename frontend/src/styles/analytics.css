@@ -1,0 +1,785 @@
+/* =========================================================
+   ANALYTICS — first draft
+   ========================================================= */
+
+.analytics-header {
+  width: 823px;
+
+  height: 63px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: flex-end;
+}
+
+
+.date-filter {
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  margin-top: 5px;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.date-filter label {
+  font-size: 14px;
+
+  color: #000;
+}
+
+
+.date-filter input {
+  height: 25px;
+
+  border: none;
+
+  background: rgba(255,255,255,0.35);
+
+  color: #000;
+
+  padding: 2px 5px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 10px;
+}
+
+
+.date-filter button {
+  height: 25px;
+
+  border: 1px solid #000;
+
+  background: #9bcaca;
+
+  color: #000;
+
+  cursor: pointer;
+}
+
+
+/* =========================================================
+   ANALYTICS GRID
+   ========================================================= */
+
+.analytics-grid {
+  width: 823px;
+
+  display: grid;
+
+  grid-template-columns: 239px 191px;
+
+  grid-template-rows:
+    96px
+    96px
+    96px;
+
+  column-gap: 15px;
+
+  row-gap: 13px;
+}
+
+
+/* =========================================================
+   ANALYTICS CHART BOX
+   ========================================================= */
+
+.chart-panel {
+  width: 239px;
+  height: 96px;
+
+  position: relative;
+
+  border: 2px solid #003b40;
+
+  background: rgba(185, 213, 214, 0.65);
+
+  overflow: hidden;
+}
+
+
+.chart-label {
+  position: absolute;
+
+  left: 43px;
+  top: 23px;
+
+  color: #000;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 16px;
+
+  line-height: 20px;
+
+  pointer-events: none;
+}
+
+
+.trend-chart {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+}
+
+
+/* =========================================================
+   ANALYTICS LOGS
+   ========================================================= */
+
+.analytics-logs {
+  width: 191px;
+
+  grid-column: 2;
+  grid-row: 1 / span 2;
+
+  background: #00566a;
+
+  border: 2px solid #003b40;
+
+  overflow: hidden;
+}
+
+
+.analytics-logs .panel-header {
+  height: 34px;
+
+  padding: 8px;
+}
+
+
+.analytics-logs .panel-title {
+  font-size: 18px;
+
+  font-weight: 400;
+
+  width: 100%;
+
+  text-align: center;
+
+  margin-top: 35px;
+}
+
+
+.analytics-logs .logs-table-wrapper {
+  width: 100%;
+
+  height: auto;
+
+  margin-top: 30px;
+}
+
+
+.analytics-logs .logs-table {
+  width: 100%;
+
+  font-size: 7px;
+}
+
+
+.analytics-logs .logs-table th {
+  font-size: 6px;
+
+  height: 20px;
+}
+
+
+.analytics-logs .logs-table td {
+  font-size: 8px;
+
+  height: 23px;
+}
+
+
+/* =========================================================
+   ANALYTICS ALERTS
+   ========================================================= */
+
+.analytics-alerts {
+  width: 191px;
+
+  height: 96px;
+
+  grid-column: 2;
+  grid-row: 3;
+
+  background: #920d20;
+
+  border: 2px solid #003b40;
+
+  overflow: hidden;
+}
+
+
+.analytics-alerts .panel-header {
+  height: 22px;
+
+  padding: 6px;
+}
+
+
+.analytics-alerts .panel-title {
+  font-size: 7px;
+}
+
+
+.analytics-alerts .alert-list {
+  width: 100%;
+
+  height: 70px;
+
+  background: transparent;
+}
+
+
+.analytics-alerts .no-alerts {
+  display: none;
+}
+
+
+.analytics-alerts .alert-message {
+  font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE — first draft (sidebar rules moved to sidebar.css)
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  .dashboard-main {
+    padding-left: 18px;
+  }
+
+  .header,
+  .safe-container,
+  .status-grid,
+  .monitoring-panel,
+  .analytics-header,
+  .analytics-grid {
+    width: calc(100vw - 118px);
+
+    max-width: 823px;
+  }
+
+  .safe-box {
+    width: 100%;
+  }
+
+  .status-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .monitoring-panel {
+    grid-template-columns: 25% 1fr;
+
+    padding-left: 6%;
+    padding-right: 6%;
+  }
+
+  .alert-list,
+  .logs-table-wrapper {
+    width: 100%;
+  }
+
+  .logs-table {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 650px) {
+
+  .dashboard-main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .status-grid {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+
+  .status-card {
+    height: 80px;
+  }
+
+  .monitoring-panel {
+    height: auto;
+
+    grid-template-columns: 1fr;
+
+    row-gap: 20px;
+
+    padding: 15px;
+  }
+
+  .analytics-grid {
+    grid-template-columns: 1fr;
+
+    grid-template-rows: auto;
+
+    height: auto;
+  }
+
+  .chart-panel,
+  .analytics-logs,
+  .analytics-alerts {
+    width: 100%;
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .chart-panel {
+    height: 150px;
+  }
+
+  .analytics-logs {
+    height: 250px;
+  }
+
+  .analytics-alerts {
+    height: 120px;
+  }
+}
+
+
+/* =========================================================
+   ANALYTICS — second draft
+   (redefines several selectors above — later in the cascade,
+   so these values are the ones that currently render)
+   ========================================================= */
+
+.analytics-header {
+  width: 100%;
+
+  height: 68px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  box-sizing: border-box;
+
+  padding-right: 8px;
+}
+
+
+/* =========================================================
+   DATE FILTER
+========================================================= */
+
+.date-filter {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+
+.date-filter-label {
+  font-size: 16px;
+
+  font-weight: 400;
+
+  color: #000;
+
+  white-space: nowrap;
+}
+
+
+.date-filter input {
+  width: 112px;
+
+  height: 30px;
+
+  box-sizing: border-box;
+
+  border: none;
+
+  border-radius: 0;
+
+  background-color: #dce9e9;
+
+  padding: 4px 7px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  font-size: 11px;
+
+  color: #000;
+
+  outline: none;
+}
+
+
+.date-filter input:focus {
+  outline: 1px solid #00576a;
+}
+
+
+.date-separator {
+  font-size: 16px;
+
+  color: #000;
+}
+
+
+/* =========================================================
+   CLEAR BUTTON
+========================================================= */
+
+.clear-date-button {
+  height: 30px;
+
+  padding: 0 9px;
+
+  border: 1px solid #00576a;
+
+  border-radius: 0;
+
+  background: #00576a;
+
+  color: #fff;
+
+  font-size: 9px;
+
+  cursor: pointer;
+}
+
+
+.clear-date-button:hover {
+  opacity: 0.85;
+}
+
+
+/* =========================================================
+   ANALYTICS GRID
+========================================================= */
+
+.analytics-grid {
+  width: 100%;
+
+  max-width: 1000px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(440px, 1fr)
+    220px;
+
+  grid-template-rows:
+    110px
+    110px
+    110px;
+
+  column-gap: 18px;
+
+  row-gap: 15px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   CHART PANEL
+========================================================= */
+
+.chart-panel {
+  width: 100%;
+
+  height: 110px;
+
+  box-sizing: border-box;
+
+  border: 2px solid #004e5d;
+
+  background: rgba(210, 231, 231, 0.42);
+
+  display: grid;
+
+  grid-template-columns:
+    135px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  padding:
+    7px
+    12px
+    7px
+    12px;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   CHART LABEL
+========================================================= */
+
+.chart-label {
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: left;
+
+  box-sizing: border-box;
+
+  padding-left: 8px;
+
+  color: #000;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  font-size: 18px;
+
+  line-height: 1.15;
+
+  font-weight: 400;
+
+  white-space: nowrap;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   GRAPH AREA
+========================================================= */
+
+.chart-graph {
+  width: 100%;
+
+  height: 94px;
+
+  min-width: 0;
+
+  min-height: 0;
+
+  overflow: hidden;
+}
+
+
+.trend-chart {
+  display: block;
+
+  width: 100%;
+
+  height: 100%;
+}
+
+
+/* =========================================================
+   NO DATA
+========================================================= */
+
+.chart-no-data {
+  width: 100%;
+
+  height: 94px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #555;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   LOGS PANEL
+========================================================= */
+
+.analytics-logs {
+  grid-column: 2;
+
+  grid-row: 1 / span 2;
+
+  width: 100%;
+
+  height: 225px;
+
+  box-sizing: border-box;
+
+  background-color: #005a6c;
+
+  border: 2px solid #004e5d;
+
+  color: #fff;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   ALERTS PANEL
+========================================================= */
+
+.analytics-alerts {
+  grid-column: 2;
+
+  grid-row: 3;
+
+  width: 100%;
+
+  height: 110px;
+
+  box-sizing: border-box;
+
+  background-color: #a70722;
+
+  border: 2px solid #004e5d;
+
+  color: #fff;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   PANEL HEADER
+========================================================= */
+
+.panel-header {
+  width: 100%;
+
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+}
+
+
+.panel-header .panel-title {
+  margin: 0;
+
+  padding: 0;
+
+  color: #fff;
+
+  font-size: 21px;
+
+  line-height: 1;
+
+  font-weight: 400;
+}
+
+
+/* =========================================================
+   LOG TABLE
+========================================================= */
+
+.analytics-logs .logs-table {
+  width: 100%;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   RESPONSIVE — second draft
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .analytics-grid {
+    grid-template-columns:
+      minmax(350px, 1fr)
+      210px;
+  }
+
+
+  .chart-panel {
+    grid-template-columns:
+      120px
+      minmax(0, 1fr);
+  }
+
+
+  .chart-label {
+    font-size: 16px;
+  }
+
+}
+
+
+@media (max-width: 750px) {
+
+  .analytics-header {
+    height: auto;
+
+    margin-top: 20px;
+
+    margin-bottom: 20px;
+
+    justify-content: flex-start;
+  }
+
+
+  .date-filter {
+    flex-wrap: wrap;
+
+    justify-content: flex-start;
+  }
+
+
+  .analytics-grid {
+    width: 100%;
+
+    max-width: none;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+  }
+
+
+  .chart-panel {
+    width: 100%;
+  }
+
+
+  .analytics-logs,
+  .analytics-alerts {
+    width: 100%;
+
+    height: auto;
+
+    min-height: 110px;
+  }
+
+}
