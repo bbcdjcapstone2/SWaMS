@@ -1,368 +1,12 @@
 /* =========================================================
-   ANALYTICS — first draft
-   ========================================================= */
-
-.analytics-header {
-  width: 823px;
-
-  height: 63px;
-
-  display: flex;
-
-  align-items: flex-start;
-
-  justify-content: flex-end;
-}
-
-
-.date-filter {
-  display: flex;
-
-  align-items: center;
-
-  gap: 4px;
-
-  margin-top: 5px;
-
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-
-.date-filter label {
-  font-size: 14px;
-
-  color: #000;
-}
-
-
-.date-filter input {
-  height: 25px;
-
-  border: none;
-
-  background: rgba(255,255,255,0.35);
-
-  color: #000;
-
-  padding: 2px 5px;
-
-  font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 10px;
-}
-
-
-.date-filter button {
-  height: 25px;
-
-  border: 1px solid #000;
-
-  background: #9bcaca;
-
-  color: #000;
-
-  cursor: pointer;
-}
-
-
-/* =========================================================
-   ANALYTICS GRID
-   ========================================================= */
-
-.analytics-grid {
-  width: 823px;
-
-  display: grid;
-
-  grid-template-columns: 239px 191px;
-
-  grid-template-rows:
-    96px
-    96px
-    96px;
-
-  column-gap: 15px;
-
-  row-gap: 13px;
-}
-
-
-/* =========================================================
-   ANALYTICS CHART BOX
-   ========================================================= */
-
-.chart-panel {
-  width: 239px;
-  height: 96px;
-
-  position: relative;
-
-  border: 2px solid #003b40;
-
-  background: rgba(185, 213, 214, 0.65);
-
-  overflow: hidden;
-}
-
-
-.chart-label {
-  position: absolute;
-
-  left: 43px;
-  top: 23px;
-
-  color: #000;
-
-  font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 16px;
-
-  line-height: 20px;
-
-  pointer-events: none;
-}
-
-
-.trend-chart {
-  width: 100%;
-  height: 100%;
-
-  display: block;
-}
-
-
-/* =========================================================
-   ANALYTICS LOGS
-   ========================================================= */
-
-.analytics-logs {
-  width: 191px;
-
-  grid-column: 2;
-  grid-row: 1 / span 2;
-
-  background: #00566a;
-
-  border: 2px solid #003b40;
-
-  overflow: hidden;
-}
-
-
-.analytics-logs .panel-header {
-  height: 34px;
-
-  padding: 8px;
-}
-
-
-.analytics-logs .panel-title {
-  font-size: 18px;
-
-  font-weight: 400;
-
-  width: 100%;
-
-  text-align: center;
-
-  margin-top: 35px;
-}
-
-
-.analytics-logs .logs-table-wrapper {
-  width: 100%;
-
-  height: auto;
-
-  margin-top: 30px;
-}
-
-
-.analytics-logs .logs-table {
-  width: 100%;
-
-  font-size: 7px;
-}
-
-
-.analytics-logs .logs-table th {
-  font-size: 6px;
-
-  height: 20px;
-}
-
-
-.analytics-logs .logs-table td {
-  font-size: 8px;
-
-  height: 23px;
-}
-
-
-/* =========================================================
-   ANALYTICS ALERTS
-   ========================================================= */
-
-.analytics-alerts {
-  width: 191px;
-
-  height: 96px;
-
-  grid-column: 2;
-  grid-row: 3;
-
-  background: #920d20;
-
-  border: 2px solid #003b40;
-
-  overflow: hidden;
-}
-
-
-.analytics-alerts .panel-header {
-  height: 22px;
-
-  padding: 6px;
-}
-
-
-.analytics-alerts .panel-title {
-  font-size: 7px;
-}
-
-
-.analytics-alerts .alert-list {
-  width: 100%;
-
-  height: 70px;
-
-  background: transparent;
-}
-
-
-.analytics-alerts .no-alerts {
-  display: none;
-}
-
-
-.analytics-alerts .alert-message {
-  font-size: 12px;
-}
-
-
-/* =========================================================
-   RESPONSIVE — first draft (sidebar rules moved to sidebar.css)
-   ========================================================= */
-
-@media (max-width: 900px) {
-
-  .dashboard-main {
-    padding-left: 18px;
-  }
-
-  .header,
-  .safe-container,
-  .status-grid,
-  .monitoring-panel,
-  .analytics-header,
-  .analytics-grid {
-    width: calc(100vw - 118px);
-
-    max-width: 823px;
-  }
-
-  .safe-box {
-    width: 100%;
-  }
-
-  .status-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .monitoring-panel {
-    grid-template-columns: 25% 1fr;
-
-    padding-left: 6%;
-    padding-right: 6%;
-  }
-
-  .alert-list,
-  .logs-table-wrapper {
-    width: 100%;
-  }
-
-  .logs-table {
-    width: 100%;
-  }
-}
-
-
-@media (max-width: 650px) {
-
-  .dashboard-main {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  .status-grid {
-    grid-template-columns: 1fr;
-    height: auto;
-  }
-
-  .status-card {
-    height: 80px;
-  }
-
-  .monitoring-panel {
-    height: auto;
-
-    grid-template-columns: 1fr;
-
-    row-gap: 20px;
-
-    padding: 15px;
-  }
-
-  .analytics-grid {
-    grid-template-columns: 1fr;
-
-    grid-template-rows: auto;
-
-    height: auto;
-  }
-
-  .chart-panel,
-  .analytics-logs,
-  .analytics-alerts {
-    width: 100%;
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  .chart-panel {
-    height: 150px;
-  }
-
-  .analytics-logs {
-    height: 250px;
-  }
-
-  .analytics-alerts {
-    height: 120px;
-  }
-}
-
-
-/* =========================================================
-   ANALYTICS — second draft
-   (redefines several selectors above — later in the cascade,
-   so these values are the ones that currently render)
+   ANALYTICS
    ========================================================= */
 
 .analytics-header {
   width: 100%;
 
-  height: 68px;
+  height: 48px;
+  flex-shrink: 0;
 
   display: flex;
 
@@ -474,6 +118,11 @@
 
   max-width: 1000px;
 
+  flex: 1;
+  min-height: 260px;
+
+  box-sizing: border-box;
+
   display: grid;
 
   grid-template-columns:
@@ -481,15 +130,11 @@
     220px;
 
   grid-template-rows:
-    110px
-    110px
-    110px;
+    repeat(3, minmax(80px, 1fr));
 
   column-gap: 18px;
 
-  row-gap: 15px;
-
-  align-items: start;
+  row-gap: 10px;
 }
 
 
@@ -499,8 +144,7 @@
 
 .chart-panel {
   width: 100%;
-
-  height: 110px;
+  height: 100%;
 
   box-sizing: border-box;
 
@@ -514,7 +158,7 @@
     135px
     minmax(0, 1fr);
 
-  align-items: center;
+  align-items: stretch;
 
   padding:
     7px
@@ -572,8 +216,7 @@
 
 .chart-graph {
   width: 100%;
-
-  height: 94px;
+  height: 100%;
 
   min-width: 0;
 
@@ -623,10 +266,12 @@
   grid-row: 1 / span 2;
 
   width: 100%;
-
-  height: 225px;
+  height: 100%;
 
   box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
 
   background-color: #005a6c;
 
@@ -648,10 +293,12 @@
   grid-row: 3;
 
   width: 100%;
-
-  height: 110px;
+  height: 100%;
 
   box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
 
   background-color: #a70722;
 
@@ -660,6 +307,26 @@
   color: #fff;
 
   overflow: hidden;
+}
+
+
+.analytics-alerts .panel-header {
+  flex-shrink: 0;
+}
+
+
+.analytics-alerts .alert-list {
+  flex: 1;
+  min-height: 0;
+
+  background: transparent;
+
+  overflow-y: auto;
+}
+
+
+.analytics-alerts .no-alerts {
+  display: none;
 }
 
 
@@ -701,6 +368,20 @@
    LOG TABLE
 ========================================================= */
 
+.analytics-logs .panel-header {
+  flex-shrink: 0;
+}
+
+
+.analytics-logs .logs-table-wrapper {
+  flex: 1;
+  height: auto;
+  min-height: 0;
+
+  overflow-y: auto;
+}
+
+
 .analytics-logs .logs-table {
   width: 100%;
 
@@ -709,7 +390,7 @@
 
 
 /* =========================================================
-   RESPONSIVE — second draft
+   RESPONSIVE
 ========================================================= */
 
 @media (max-width: 1100px) {
@@ -770,6 +451,7 @@
 
   .chart-panel {
     width: 100%;
+    height: 150px;
   }
 
 
@@ -779,7 +461,6 @@
 
     height: auto;
 
-    min-height: 110px;
+    min-height: 150px;
   }
-
 }

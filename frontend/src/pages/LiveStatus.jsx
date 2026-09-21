@@ -82,9 +82,19 @@ function LiveStatus() {
 
         <section className="monitoring-panel">
 
-          <Alerts
-            alerts={[]}
-          />
+          <div className="panel">
+
+            <div className="panel-header">
+              <h2 className="panel-title">
+                ALERTS
+              </h2>
+            </div>
+
+            <Alerts
+              alerts={[]}
+            />
+
+          </div>
 
           <LogsTable
             readings={latestLogs}

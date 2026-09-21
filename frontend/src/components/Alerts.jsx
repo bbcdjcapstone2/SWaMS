@@ -1,67 +1,57 @@
 function Alerts({ alerts = [] }) {
   return (
-    <div className="panel">
+    <div className="alert-list">
 
-      <div className="panel-header">
-        <h2 className="panel-title">
-          ALERTS
-        </h2>
-      </div>
+      {alerts.length === 0 ? (
 
-      <div className="alert-list">
+        <div className="no-alerts">
 
-        {alerts.length === 0 ? (
+          <div className="no-alerts-main">
+            NO ALERTS
+          </div>
 
-          <div className="no-alerts">
+          <div className="no-alerts-subtitle">
+            All parameters are safe
+          </div>
 
-            <div className="no-alerts-main">
-              NO ALERTS
+        </div>
+
+      ) : (
+
+        alerts.map((alert) => (
+
+          <div
+            className="alert-item"
+            key={alert.id}
+          >
+
+            <div className="alert-item-header">
+
+              <span className="alert-parameter">
+                {alert.parameter}
+              </span>
+
+              <span className="alert-value">
+                {alert.value}
+              </span>
+
             </div>
 
-            <div className="no-alerts-subtitle">
-              All parameters are safe
+            <p className="alert-message">
+              {alert.message}
+            </p>
+
+            <div className="alert-time">
+              {new Date(
+                alert.recordedAt
+              ).toLocaleString()}
             </div>
 
           </div>
 
-        ) : (
+        ))
 
-          alerts.map((alert) => (
-
-            <div
-              className="alert-item"
-              key={alert.id}
-            >
-
-              <div className="alert-item-header">
-
-                <span className="alert-parameter">
-                  {alert.parameter}
-                </span>
-
-                <span className="alert-value">
-                  {alert.value}
-                </span>
-
-              </div>
-
-              <p className="alert-message">
-                {alert.message}
-              </p>
-
-              <div className="alert-time">
-                {new Date(
-                  alert.recordedAt
-                ).toLocaleString()}
-              </div>
-
-            </div>
-
-          ))
-
-        )}
-
-      </div>
+      )}
 
     </div>
   );
