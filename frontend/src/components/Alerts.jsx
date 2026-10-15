@@ -1,58 +1,57 @@
+
 function Alerts({ alerts = [] }) {
   return (
     <div className="alert-list">
-
       {alerts.length === 0 ? (
-
         <div className="no-alerts">
-
           <div className="no-alerts-main">
-            NO ALERTS
+            SAFE
           </div>
 
           <div className="no-alerts-subtitle">
-            All parameters are safe
+            No configured threshold violations detected
           </div>
-
         </div>
-
       ) : (
+        alerts.map((alert) => {
+          const severity =
+            alert.severity === "danger"
+              ? "danger"
+              : "warning";
 
-        alerts.map((alert) => (
+          return (
+            <div
+              className={`alert-item alert-${severity}`}
+              key={alert.id}
+            >
+              <div className="alert-item-header">
+                <span className="alert-parameter">
+                  {alert.parameter}
+                </span>
 
-          <div
-            className="alert-item"
-            key={alert.id}
-          >
+                <span className="alert-value">
+                  {alert.value}
+                </span>
+              </div>
 
-            <div className="alert-item-header">
+              <p className="alert-message">
+                {alert.message}
+              </p>
 
-              <span className="alert-parameter">
-                {alert.parameter}
-              </span>
-
-              <span className="alert-value">
-                {alert.value}
-              </span>
-
+              <div className="alert-time">
+                {alert.recordedAt &&
+                !Number.isNaN(
+                  new Date(alert.recordedAt).getTime()
+                )
+                  ? new Date(
+                      alert.recordedAt
+                    ).toLocaleString()
+                  : "Time unavailable"}
+              </div>
             </div>
-
-            <p className="alert-message">
-              {alert.message}
-            </p>
-
-            <div className="alert-time">
-              {new Date(
-                alert.recordedAt
-              ).toLocaleString()}
-            </div>
-
-          </div>
-
-        ))
-
+          );
+        })
       )}
-
     </div>
   );
 }

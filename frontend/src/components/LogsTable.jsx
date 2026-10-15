@@ -1,37 +1,9 @@
-function getStatus(reading, alerts = []) {
-  const alert = alerts.find(
-    (item) =>
-      item.sensorId === reading.sensorId &&
-      item.recordedAt === reading.recordedAt
-  );
 
-  return alert ? "warning" : "safe";
-}
-
-
-function formatTime(dateString) {
-  const date = new Date(dateString);
-
-  return date.toLocaleTimeString([], {
-    hour: "numeric",
-    minute: "2-digit",
-  });
-}
-
-
-function LogsTable({
-  readings = [],
-  alerts = [],
-}) {
-
+function LogsTable({ readings = [] }) {
   return (
-
     <div className="logs-table-wrapper">
-
       <table className="logs-table">
-
         <thead>
-
           <tr>
             <th>TIME</th>
             <th>PH</th>
@@ -39,64 +11,49 @@ function LogsTable({
             <th>TURBIDITY</th>
             <th>STATUS</th>
           </tr>
-
         </thead>
 
-
         <tbody>
+          {readings.map((reading, index) => (
+            <tr key={reading.id ?? index}>
+              <td>
+                {reading.recordedAt
+                  ? new Date(
+                      reading.recordedAt
+                    ).toLocaleString()
+                  : "--"}
+              </td>
 
-          {readings.map((reading) => {
+              <td>
+                {reading.ph == null ? "--" : reading.ph}
+              </td>
 
-            const status =
-              getStatus(
-                reading,
-                alerts
-              );
+              <td>
+                {reading.temperature == null
+                  ? "--"
+                  : `${reading.temperature}°C`}
+              </td>
 
-            return (
+              <td>
+                {reading.turbidity == null
+                  ? "--"
+                  : `${reading.turbidity} NTU`}
+              </td>
 
-              <tr key={reading.id}>
+              <td>
+                {reading.status ?? "REVIEW"}
+              </td>
+            </tr>
+          ))}
 
-                <td>
-                  {formatTime(
-                    reading.recordedAt
-                  )}
-                </td>
-
-                <td>
-                  {reading.ph}
-                </td>
-
-                <td>
-                  {reading.temperature}°C
-                </td>
-
-                <td>
-                  {reading.turbidity} NTU
-                </td>
-
-                <td>
-
-                  <span
-                    className={
-                      `status-dot ${status}`
-                    }
-                  />
-
-                </td>
-
-              </tr>
-
-            );
-
-          })}
-
+          {readings.length === 0 && (
+            <tr>
+              <td colSpan="5">No logs available.</td>
+            </tr>
+          )}
         </tbody>
-
       </table>
-
     </div>
-
   );
 }
 

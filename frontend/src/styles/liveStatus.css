@@ -1,386 +1,354 @@
+
 /* =========================================================
    MAIN CONTENT
    ========================================================= */
 
+
 .dashboard-main {
   flex: 1;
-
+  width: 0;
   min-width: 0;
-  min-height: 100vh;
-
+  height: 100vh;
+  min-height: 0;
   box-sizing: border-box;
-
-  padding: 18px 24px 16px 24px;
-
+  padding: 12px 24px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  overflow: hidden;
 
-  background:
-    linear-gradient(
-      108deg,
-      #c4e3e2 0%,
-      #9bcaca 30%,
-      #50afb1 67%,
-      #078f96 100%
-    );
+  background: linear-gradient(
+    108deg,
+    #c4e3e2 0%,
+    #9bcaca 30%,
+    #50afb1 67%,
+    #078f96 100%
+  );
 }
 
+
+/* Shared width: use the available screen */
+.header,
+.safe-container,
+.status-grid,
+.monitoring-panel {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
 
 /* =========================================================
    HEADER
    ========================================================= */
 
 .header {
-  width: 100%;
-  max-width: 1000px;
-  height: 63px;
-
-  box-sizing: border-box;
-
+  min-height: 52px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-
-  padding: 0;
-
+  padding: 0 2px;
   color: #000;
 }
-
 
 .header-title {
   margin: 0;
-
   font-family: Arial, Helvetica, sans-serif;
-
   font-size: 26px;
   line-height: 27px;
-
   font-weight: 700;
-
   letter-spacing: -0.5px;
 }
 
-
 .header-subtitle {
   margin: 2px 0 0 4px;
-
   font-family: Arial, Helvetica, sans-serif;
-
   font-size: 11px;
   line-height: 11px;
-
   font-weight: 700;
 }
-
 
 .header-date {
-  margin-top: 35px;
-
+  margin-top: 12px;
   font-family: Arial, Helvetica, sans-serif;
-
   font-size: 11px;
-
   font-weight: 700;
+  text-align: right;
 }
 
-
 /* =========================================================
-   SAFE STATUS
+   OVERALL STATUS BANNER
    ========================================================= */
 
 .safe-container {
-  width: 100%;
-  max-width: 1000px;
-
-  margin: 0 0 16px 0;
+  margin: 0 0 10px;
 }
-
 
 .safe-box {
   width: 100%;
-  min-height: 137px;
-
+  min-height: 100px;
   box-sizing: border-box;
-
   padding: 12px;
-
   border: 5px solid #002b2c;
-
   background: #00a979;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-family: Arial, Helvetica, sans-serif;
-
   color: #000;
-
   font-size: clamp(28px, 5vw, 52px);
-
   font-weight: 800;
-
   letter-spacing: 5px;
-
   text-align: center;
+  overflow-wrap: anywhere;
 }
 
+.safe-box.safe-status {
+  background: #00a979;
+  color: #000;
+}
 
 .safe-box.warning-status {
   background: #f0a51c;
+  color: #17202a;
 }
 
+.safe-box.danger-status {
+  background: #dc3545;
+  color: #fff;
+}
+
+.safe-box.unknown-status {
+  background: #687780;
+  color: #fff;
+}
 
 /* =========================================================
-   SENSOR VALUE CARDS
+   SENSOR CARDS
    ========================================================= */
 
 .status-grid {
-  width: 100%;
-  max-width: 1000px;
-
-  min-height: 101px;
-
+  min-height: 90px;
   display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
-  gap: 17px;
-
-  margin-bottom: 16px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 12px;
 }
-
 
 .status-card {
-  min-height: 101px;
-
+  min-width: 0;
+  min-height: 90px;
+  padding: 10px;
+  box-sizing: border-box;
   background: #003b40;
-
-  color: white;
-
+  color: #fff;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
+  border-radius: 3px;
 }
-
 
 .status-card-title {
   margin-bottom: 5px;
-
   font-family: Arial, Helvetica, sans-serif;
-
   font-size: 11px;
-
   font-weight: 700;
 }
-
 
 .status-card-value {
   font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 32px;
-
-  line-height: 32px;
-
+  font-size: clamp(24px, 2.5vw, 32px);
+  line-height: 1.15;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
-
 
 .status-card-unit {
   margin-left: 5px;
-
   font-size: 13px;
-
   font-weight: 700;
-
   vertical-align: middle;
 }
 
+.status-card.safe {
+  background: #00a979;
+  color: #000;
+}
+
+.status-card.warning {
+  background: #f0a51c;
+  color: #000;
+}
+
+.status-card.danger {
+  background: #dc3545;
+  color: #fff;
+}
+
+.status-card.not-evaluated {
+  background: #687780;
+  color: #fff;
+}
 
 /* =========================================================
-   BOTTOM MONITORING CONTAINER
+   MONITORING AREA
+   Alerts and Logs are separate cards
    ========================================================= */
 
 .monitoring-panel {
-  width: 100%;
-  max-width: 1000px;
-
   flex: 1;
-  min-height: 260px;
-
-  box-sizing: border-box;
-
-  background: #003b40;
-
+  min-height: 360px;
   display: grid;
-
-  grid-template-columns: minmax(160px, 220px) 1fr;
-
-  column-gap: 15px;
-
-  padding: 16px 24px;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 2fr);
+  align-items: stretch;
+  gap: 16px;
+  padding: 0;
+  background: transparent;
 }
 
-
-/* =========================================================
-   GENERAL PANEL
-   ========================================================= */
+/* Separate panel/card for Alerts and Logs */
+.panel,
+.analytics-logs,
+.analytics-alerts {
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 14px;
+  background: #003b40;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  box-shadow: 0 3px 10px rgba(0, 43, 44, 0.12);
+}
 
 .panel {
-  min-width: 0;
   height: 100%;
-
-  box-sizing: border-box;
-
   display: flex;
   flex-direction: column;
-
-  background: transparent;
-
-  color: white;
 }
-
 
 .panel-header {
-  height: 30px;
+  min-height: 28px;
   flex-shrink: 0;
-
   display: flex;
-
   align-items: flex-start;
-
-  padding: 0;
+  justify-content: flex-start;
+  padding: 0 0 8px;
 }
-
 
 .panel-title {
   margin: 0;
-
   font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 11px;
-
-  line-height: 13px;
-
+  font-size: 13px;
+  line-height: 16px;
   font-weight: 700;
-
-  color: white;
+  color: #fff;
 }
 
-
 /* =========================================================
-   ALERT PANEL
+   ALERTS
    ========================================================= */
 
 .alert-list {
   width: 100%;
-
   flex: 1;
-  min-height: 0;
-
-  background: #078f9a;
-
+  min-height: 180px;
+  box-sizing: border-box;
+  background: #003b40;
   display: flex;
   flex-direction: column;
-
-  overflow: hidden;
+  overflow-y: auto;
+  border-radius: 2px;
 }
-
 
 .no-alerts {
   width: 100%;
-  height: 100%;
-
+  flex: 1;
+  min-height: 180px;
+  box-sizing: border-box;
+  padding: 16px;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   justify-content: center;
-
-  color: white;
-
+  color: #fff;
   font-family: "Rajdhani", Arial, sans-serif;
-
   text-align: center;
 }
 
-
 .no-alerts-main {
   width: 100%;
-  max-width: 184px;
-
+  max-width: 220px;
   padding-bottom: 13px;
-
-  border-bottom: 1px solid rgba(255,255,255,0.8);
-
+  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
   font-size: 24px;
-
   line-height: 25px;
-
-  font-weight: 500;
+  font-weight: 700;
 }
-
 
 .no-alerts-subtitle {
   margin-top: 7px;
-
   font-size: 12px;
-
-  line-height: 13px;
-
+  line-height: 16px;
   font-weight: 400;
 }
 
-
-/* Actual alert */
-
 .alert-item {
   width: 100%;
-
-  padding: 20px 15px;
-
-  color: white;
-
-  border-bottom: 1px solid rgba(255,255,255,0.25);
+  box-sizing: border-box;
+  padding: 16px 14px;
+  color: #fff;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  border-left: 5px solid transparent;
 }
 
+.alert-item.alert-warning {
+  background: #f0a51c;
+  color: #17202a;
+  border-left-color: #d88700;
+}
+
+.alert-item.alert-danger {
+  background: #dc3545;
+  color: #fff;
+  border-left-color: #a71d2a;
+}
 
 .alert-item-header {
   display: flex;
-
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
 }
 
-
-.alert-parameter {
-  font-size: 14px;
-  font-weight: 700;
-}
-
-
+.alert-parameter,
 .alert-value {
   font-size: 14px;
   font-weight: 700;
+  overflow-wrap: anywhere;
 }
-
 
 .alert-message {
   margin: 8px 0 0;
-
   font-size: 12px;
+  line-height: 1.5;
 }
-
 
 .alert-time {
   margin-top: 7px;
-
   font-size: 10px;
+  overflow-wrap: anywhere;
 }
 
+.alert-item.alert-warning .alert-parameter,
+.alert-item.alert-warning .alert-value,
+.alert-item.alert-warning .alert-message,
+.alert-item.alert-warning .alert-time,
+.alert-item.alert-danger .alert-parameter,
+.alert-item.alert-danger .alert-value,
+.alert-item.alert-danger .alert-message,
+.alert-item.alert-danger .alert-time {
+  color: inherit;
+}
 
 /* =========================================================
    LOGS TABLE
@@ -388,29 +356,21 @@
 
 .logs-table-wrapper {
   width: 100%;
-  height: 100%;
-
+  min-width: 0;
   box-sizing: border-box;
-
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: auto;
 }
-
 
 .logs-table {
   width: 100%;
+  min-width: 520px;
   height: auto;
-
   border-collapse: collapse;
-
   table-layout: fixed;
-
-  color: white;
-
+  color: #fff;
   font-family: "Rajdhani", Arial, sans-serif;
 }
-
-
-/* Column widths */
 
 .logs-table th:nth-child(1),
 .logs-table td:nth-child(1) {
@@ -419,7 +379,7 @@
 
 .logs-table th:nth-child(2),
 .logs-table td:nth-child(2) {
-  width: 15%;
+  width: 13%;
 }
 
 .logs-table th:nth-child(3),
@@ -429,152 +389,232 @@
 
 .logs-table th:nth-child(4),
 .logs-table td:nth-child(4) {
-  width: 24%;
+  width: 25%;
 }
 
 .logs-table th:nth-child(5),
 .logs-table td:nth-child(5) {
-  width: 24%;
+  width: 25%;
 }
-
-
-/* Header */
 
 .logs-table th {
-  height: 29px;
-
-  padding: 0;
-
+  height: 36px;
+  padding: 6px 4px;
   background: transparent;
-
-  color: white;
-
+  color: #fff;
   font-family: Arial, Helvetica, sans-serif;
-
-  font-size: 8px;
-
+  font-size: 10px;
   font-weight: 700;
-
   text-align: center;
-
   vertical-align: middle;
-
-  border-right: 1px solid rgba(255,255,255,0.65);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
 }
-
-
-.logs-table th:last-child {
-  border-right: none;
-}
-
-
-/* Data */
 
 .logs-table td {
-  height: 34px;
-
-  padding: 0;
-
-  color: white;
-
+  height: 38px;
+  padding: 6px 4px;
+  color: #fff;
   font-size: 11px;
-
   font-weight: 400;
-
   text-align: center;
-
   vertical-align: middle;
-
-  border-right: 1px solid rgba(255,255,255,0.55);
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-
+.logs-table th:last-child,
 .logs-table td:last-child {
   border-right: none;
 }
 
-
 /* =========================================================
-   STATUS DOTS
+   LOG STATUS INDICATORS
    ========================================================= */
 
 .status-dot {
-  width: 20px;
-  height: 20px;
-
+  width: 14px;
+  height: 14px;
   display: inline-block;
-
   border-radius: 50%;
+  vertical-align: middle;
 }
-
 
 .status-dot.safe {
   background: #00b87a;
 }
 
-
 .status-dot.warning {
   background: #ff9f1a;
 }
-
 
 .status-dot.danger {
   background: #e64b4b;
 }
 
-
 /* =========================================================
-   RESPONSIVE
+   ANALYTICS LAYOUT
    ========================================================= */
 
-@media (max-width: 900px) {
+.analytics-header,
+.analytics-grid {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
 
+.analytics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 16px;
+}
+
+.analytics-grid > * {
+  min-width: 0;
+}
+
+.analytics-logs,
+.analytics-alerts {
+  min-height: 260px;
+  display: flex;
+  flex-direction: column;
+}
+
+.analytics-logs .logs-table-wrapper,
+.analytics-alerts .alert-list {
+  flex: 1;
+}
+
+/* =========================================================
+   RESPONSIVE LAYOUT
+   ========================================================= */
+
+@media (min-width: 1500px) {
   .dashboard-main {
-    padding: 20px 16px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .monitoring-panel {
+    grid-template-columns: minmax(300px, 0.8fr) minmax(0, 2fr);
+    gap: 20px;
   }
 }
 
+@media (max-width: 900px) {
+  .dashboard-main {
+    padding: 10px 12px;
+  }
+
+  .monitoring-panel {
+    grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.6fr);
+    gap: 10px;
+  }
+
+  .panel,
+  .analytics-logs,
+  .analytics-alerts {
+    padding: 10px;
+  }
+
+  .analytics-grid {
+    gap: 10px;
+  }
+}
 
 @media (max-width: 650px) {
-
   .dashboard-main {
-    padding: 16px 10px;
+    padding: 8px;
   }
 
   .header {
-    flex-direction: column;
-    gap: 4px;
+    min-height: 48px;
+    gap: 6px;
+  }
+
+  .header-title {
+    font-size: 23px;
   }
 
   .header-date {
-    margin-top: 0;
+    margin-top: 5px;
+    font-size: 10px;
+  }
+
+  .safe-box {
+    min-height: 78px;
+    border-width: 4px;
+    letter-spacing: 2px;
   }
 
   .status-grid {
     grid-template-columns: 1fr;
-    min-height: auto;
+    gap: 8px;
+  }
+
+  .status-card {
+    min-height: 72px;
   }
 
   .monitoring-panel {
-    grid-template-columns: 1fr;
-    flex: none;
+    grid-template-columns: minmax(0, 1fr);
     min-height: auto;
-
-    row-gap: 20px;
-
-    padding: 15px;
+    gap: 12px;
   }
 
   .panel {
     height: auto;
+    min-height: 240px;
   }
 
   .alert-list {
     flex: none;
-    height: 200px;
+    min-height: 180px;
+    max-height: 320px;
   }
 
-  .logs-table-wrapper {
-    height: auto;
+  .analytics-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
+
+  .analytics-logs,
+  .analytics-alerts {
+    min-height: 220px;
+  }
+}
+
+
+/* LIVE STATUS — solid logs background */
+.monitoring-panel .logs-table-wrapper {
+  background-color: #005a6c;
+  opacity: 1;
+}
+
+.monitoring-panel .logs-table {
+  background-color: #005a6c;
+  color: #fff;
+}
+
+/* Keep the logs header and rows fully opaque */
+.monitoring-panel .logs-table thead,
+.monitoring-panel .logs-table tbody,
+.monitoring-panel .logs-table tr,
+.monitoring-panel .logs-table th,
+.monitoring-panel .logs-table td {
+  background-color: #005a6c;
+  color: #fff;
+}
+
+/* Match Analytics log dividers */
+.monitoring-panel .logs-table th,
+.monitoring-panel .logs-table td {
+  border-right: 1px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.monitoring-panel .logs-table th:last-child,
+.monitoring-panel .logs-table td:last-child {
+  border-right: none;
 }

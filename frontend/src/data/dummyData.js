@@ -1,6 +1,7 @@
-// ============================================================
-// SENSOR INFORMATION
-// ============================================================
+
+ // ============================================================
+ // SENSOR INFORMATION
+ // ============================================================
 
 export const sensorInfo = {
   name: "Water Quality Sensor",
@@ -12,8 +13,8 @@ export const sensorInfo = {
 // ============================================================
 // STORED SENSOR READINGS
 // ============================================================
-// These are temporary frontend readings.
-// Later, these will come from your backend/MySQL database.
+// Temporary frontend readings for testing.
+// Actual readings are fetched from the backend by the pages.
 
 export const readings = [
   {
@@ -24,7 +25,6 @@ export const readings = [
     temperature: 26,
     turbidity: 40,
   },
-
   {
     id: 2,
     sensorId: "WQM-001",
@@ -33,7 +33,6 @@ export const readings = [
     temperature: 27,
     turbidity: 90,
   },
-
   {
     id: 3,
     sensorId: "WQM-001",
@@ -42,7 +41,6 @@ export const readings = [
     temperature: 27,
     turbidity: 65,
   },
-
   {
     id: 4,
     sensorId: "WQM-001",
@@ -51,7 +49,6 @@ export const readings = [
     temperature: 27,
     turbidity: 50,
   },
-
   {
     id: 5,
     sensorId: "WQM-001",
@@ -60,7 +57,6 @@ export const readings = [
     temperature: 26,
     turbidity: 45,
   },
-
   {
     id: 6,
     sensorId: "WQM-001",
@@ -69,7 +65,6 @@ export const readings = [
     temperature: 27,
     turbidity: 55,
   },
-
   {
     id: 7,
     sensorId: "WQM-001",
@@ -78,7 +73,6 @@ export const readings = [
     temperature: 28,
     turbidity: 60,
   },
-
   {
     id: 8,
     sensorId: "WQM-001",
@@ -87,7 +81,6 @@ export const readings = [
     temperature: 26,
     turbidity: 35,
   },
-
   {
     id: 9,
     sensorId: "WQM-001",
@@ -96,7 +89,6 @@ export const readings = [
     temperature: 27,
     turbidity: 48,
   },
-
   {
     id: 10,
     sensorId: "WQM-001",
@@ -111,7 +103,8 @@ export const readings = [
 // ============================================================
 // STORED ALERTS
 // ============================================================
-// These alerts are associated with stored sensor readings.
+// These are sample alerts for frontend testing only.
+// Actual alerts should be derived from backend readings.
 
 export const alerts = [
   {
@@ -120,7 +113,7 @@ export const alerts = [
     recordedAt: "2026-09-18T10:00:00",
     parameter: "Turbidity",
     value: 90,
-    message: "Turbidity exceeded the safe level.",
+    message: "Sample alert for frontend testing.",
     severity: "warning",
   },
 ];
@@ -129,7 +122,6 @@ export const alerts = [
 // ============================================================
 // GET LATEST READING
 // ============================================================
-// Returns the newest sensor reading.
 
 export const getLatestReading = () => {
   if (!Array.isArray(readings) || readings.length === 0) {
@@ -138,8 +130,8 @@ export const getLatestReading = () => {
 
   return [...readings].sort(
     (a, b) =>
-      new Date(b.recordedAt).getTime() -
-      new Date(a.recordedAt).getTime()
+      new Date(b.recordedAt ?? b.created_at).getTime() -
+      new Date(a.recordedAt ?? a.created_at).getTime()
   )[0];
 };
 
@@ -147,45 +139,79 @@ export const getLatestReading = () => {
 // ============================================================
 // GET SENSOR STATUS
 // ============================================================
-// Determines the current sensor status based on the latest reading.
+// Evaluates the actual reading against the thresholds
+// stated in the capstone paper.
+//
+// pH: 6.5–8.5
+// Temperature: 24–32 °C
+// Turbidity: 50–100 NTU is the range stated in Process 2.3,
+// but the lower-bound interpretation needs confirmation.
+// Values above 100 NTU are flagged.
 
 export const getSensorStatus = (reading) => {
   if (!reading) {
     return "NO DATA";
   }
 
-  const hasAlert = alerts.some(
-    (alert) =>
-      alert.sensorId === reading.sensorId &&
-      alert.recordedAt === reading.recordedAt
-  );
+  const ph = Number(reading.ph);
+  const temperature = Number(reading.temperature);
+  const turbidity = Number(reading.turbidity);
 
-  return hasAlert ? "WARNING" : "SAFE";
+  // Missing or invalid values must not be marked safe.
+  if (
+    reading.ph == null ||
+    reading.temperature == null ||
+    reading.turbidity == null ||
+    !Number.isFinite(ph) ||
+    !Number.isFinite(temperature) ||
+    !Number.isFinite(turbidity)
+  ) {
+    return "NOT EVALUATED";
+  }
+
+  // Check pH threshold.
+  if (ph < 6.5 || ph > 8.5) {
+    return "WARNING";
+  }
+
+  // Check temperature threshold.
+  if (temperature < 24 || temperature > 32) {
+    return "WARNING";
+  }
+
+  // Turbidity above the stated upper limit.
+  if (turbidity > 100) {
+    return "WARNING";
+  }
+
+  // Lower turbidity limit needs confirmation.
+  if (turbidity < 50) {
+    return "REVIEW";
+  }
+
+  return "SAFE";
 };
 
 
 // ============================================================
 // GET READINGS BY DATE
 // ============================================================
-// This will be useful for the Analytics page date filter.
 
-export const getReadingsByDate = (
-  startDate,
-  endDate
-) => {
+export const getReadingsByDate = (startDate, endDate) => {
   if (!startDate && !endDate) {
     return readings;
   }
 
   return readings.filter((reading) => {
-    const readingDate = new Date(reading.recordedAt);
+    const recordedAt = reading.recordedAt ?? reading.created_at;
+    const readingDate = new Date(recordedAt);
 
     const start = startDate
       ? new Date(`${startDate}T00:00:00`)
       : null;
 
     const end = endDate
-      ? new Date(`${endDate}T23:59:59`)
+      ? new Date(`${endDate}T23:59:59.999`)
       : null;
 
     if (start && readingDate < start) {
@@ -204,12 +230,8 @@ export const getReadingsByDate = (
 // ============================================================
 // GET ALERTS BY DATE
 // ============================================================
-// Useful for the Analytics page.
 
-export const getAlertsByDate = (
-  startDate,
-  endDate
-) => {
+export const getAlertsByDate = (startDate, endDate) => {
   if (!startDate && !endDate) {
     return alerts;
   }
@@ -222,7 +244,7 @@ export const getAlertsByDate = (
       : null;
 
     const end = endDate
-      ? new Date(`${endDate}T23:59:59`)
+      ? new Date(`${endDate}T23:59:59.999`)
       : null;
 
     if (start && alertDate < start) {
@@ -241,14 +263,13 @@ export const getAlertsByDate = (
 // ============================================================
 // GET LATEST READINGS
 // ============================================================
-// Used by the Logs section.
 
 export const getLatestReadings = (limit = 5) => {
   return [...readings]
     .sort(
       (a, b) =>
-        new Date(b.recordedAt).getTime() -
-        new Date(a.recordedAt).getTime()
+        new Date(b.recordedAt ?? b.created_at).getTime() -
+        new Date(a.recordedAt ?? a.created_at).getTime()
     )
     .slice(0, limit);
 };

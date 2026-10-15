@@ -1,15 +1,14 @@
+
 import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
     <aside className="sidebar">
-
       <div className="sidebar-logo">
-        WQM
+        <img src="/SWaMS_Logo.png" alt="WQM Logo" />
       </div>
 
       <nav className="sidebar-nav">
-
         <NavLink
           to="/"
           className={({ isActive }) =>
@@ -27,9 +26,7 @@ function Sidebar() {
         >
           ANALYTICS
         </NavLink>
-
       </nav>
-
     </aside>
   );
 }

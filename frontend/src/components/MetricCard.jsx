@@ -1,11 +1,25 @@
+
 function MetricCard({
   title,
   value,
-  unit,
+  unit = "",
+  status = "SAFE",
 }) {
-  return (
-    <div className="status-card">
+  const normalizedStatus = String(status)
+    .toLowerCase()
+    .replace(/\s+/g, "-");
 
+  const statusClass =
+    normalizedStatus === "safe"
+      ? "safe"
+      : normalizedStatus === "warning"
+        ? "warning"
+        : normalizedStatus === "danger"
+          ? "danger"
+          : "not-evaluated";
+
+  return (
+    <div className={`status-card ${statusClass}`}>
       <div className="status-card-title">
         {title}
       </div>
@@ -19,7 +33,6 @@ function MetricCard({
           </span>
         )}
       </div>
-
     </div>
   );
 }
